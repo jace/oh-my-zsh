@@ -6,9 +6,10 @@ function last_status {
     }
 
 function prompt_char {
-    git branch >/dev/null 2>/dev/null && echo '±' && return
-    hg root >/dev/null 2>/dev/null && echo '☿' && return
-    echo '○'
+    git branch >/dev/null 2>/dev/null && print -P '±' && return
+    hg root >/dev/null 2>/dev/null && print -P '☿' && return
+    svn info >/dev/null 2>/dev/null && print -P '⇵' && return
+    print -P '$'
 }
 
 function virtualenv_info {
@@ -23,7 +24,8 @@ function hg_prompt_info {
 patches: <patches|join( → )|pre_applied(%{$fg[yellow]%})|post_applied(%{$reset_color%})|pre_unapplied(%{$fg_bold[black]%})|post_unapplied(%{$reset_color%})>>" 2>/dev/null
 }
 
-PROMPT='%{$fg_bold[red]%}$(last_status)%{$fg[magenta]%}%n%{$reset_color%}@%{$fg[yellow]%}%m%{$reset_color%} %{$fg_bold[green]%}${PWD/#$HOME/~}%{$reset_color%}$(hg_prompt_info)$(git_prompt_info) $(virtualenv_info)$(prompt_char) '
+#PROMPT='%{$fg_bold[red]%}$(last_status)%{$fg[magenta]%}%n%{$reset_color%}@%{$fg[yellow]%}%m%{$reset_color%} %{$fg_bold[green]%}${PWD/#$HOME/~}%{$reset_color%}$(hg_prompt_info)$(git_prompt_info) $(virtualenv_info)$(prompt_char) '
+PROMPT='%{$fg_bold[red]%}$(last_status)%{$fg[magenta]%}%n%{$reset_color%}@%{$fg[yellow]%}%m%{$reset_color%} %{$fg_bold[blue]%}${PWD/#$HOME/~}%{$reset_color%}$(hg_prompt_info)$(git_prompt_info) $(virtualenv_info)$ '
 RPROMPT='%{$fg[yellow]%}[%*]%{$reset_color%}'
 
 ZSH_THEME_GIT_PROMPT_PREFIX=" on %{$fg[magenta]%}"
