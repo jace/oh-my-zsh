@@ -7,6 +7,7 @@ function git_prompt_info() {
 
 parse_git_dirty () {
   gitstat=$(git status 2>/dev/null | grep '\(# Untracked\|# Changes\|# Changed but not updated:\)')
+}
 
 # Checks if working tree is dirty
 parse_git_dirty() {
